@@ -1,0 +1,132 @@
+package com.test.lists.sample;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LinkList.
+ *
+ * @param <T>
+ *            the generic type
+ */
+public class LinkList<T> {
+
+	/**
+	 * The Class Node.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 */
+	private static class Node<T> {
+
+		/** The value. */
+		T value;
+
+		/** The next node. */
+		Node<T> nextNode;
+
+		/**
+		 * Instantiates a new node.
+		 *
+		 * @param value
+		 *            the value
+		 */
+		public Node(T value) {
+			super();
+			this.value = value;
+		}
+
+		/**
+		 * Gets the value.
+		 *
+		 * @return the value
+		 */
+		public T getValue() {
+			return value;
+		}
+
+		/**
+		 * Gets the next node.
+		 *
+		 * @return the next node
+		 */
+		public Node<T> getNextNode() {
+			return nextNode;
+		}
+
+		/**
+		 * Sets the next node.
+		 *
+		 * @param nextNode
+		 *            the new next node
+		 */
+		public void setNextNode(Node<T> nextNode) {
+			this.nextNode = nextNode;
+		}
+	}
+
+	/** The head node. */
+	Node<T> headNode = null;
+
+	/**
+	 * Adds the.
+	 *
+	 * @param data
+	 *            the data
+	 */
+	public void add(T data) {
+		Node<T> newNode = new Node<T>(data);
+		if (headNode == null) {
+			newNode.nextNode = null;
+		} else {
+			newNode.nextNode = headNode;
+		}
+		headNode = newNode;
+	}
+
+	/**
+	 * Removes the
+	 *
+	 * @param data
+	 *            the data
+	 */
+	public T remove() {
+		if (headNode == null) {
+			return null;
+		}
+		Node<T> tempNode = headNode;
+		if (tempNode.nextNode == null) {
+			headNode = null;
+			return tempNode.getValue();
+		}
+		headNode = tempNode.nextNode;
+		tempNode.nextNode = null;
+		return tempNode.getValue();
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		StringBuilder linkListStr = new StringBuilder("");
+		String initSeperator = "";
+		Node<T> tempNode = headNode;
+		while (tempNode != null) {
+			linkListStr.append(initSeperator).append(tempNode.value);
+			initSeperator = "->";
+			tempNode = tempNode.nextNode;
+		}
+		return linkListStr.toString();
+	}
+	
+	public static void main(String[] args) {
+		LinkList<Integer> linkList= new LinkList<Integer>();
+		linkList.add(5);
+		linkList.add(1);
+		linkList.add(10);
+		linkList.add(12);
+		linkList.add(3);
+		linkList.add(4);
+		
+		System.out.println(linkList);
+		
+	}
+
+}
