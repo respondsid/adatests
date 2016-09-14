@@ -1,5 +1,7 @@
 package com.test.lists.sample;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class LinkList.
@@ -115,18 +117,104 @@ public class LinkList<T> {
 		}
 		return linkListStr.toString();
 	}
-	
+
+	public T returnMidValue() {
+		if (headNode == null) {
+			return null;
+		}
+		Node<T> slow, fast;
+		slow = headNode;
+		fast = headNode;
+		while (fast != null && fast.nextNode != null) {
+			slow = slow.nextNode;
+			fast = fast.nextNode.nextNode;
+		}
+		return slow.getValue();
+	}
+
+	public int returnMidIdx() {
+		if (headNode == null) {
+			return -1;
+		}
+		Node<T> slow, fast;
+		slow = headNode;
+		fast = headNode;
+		int i = 0;
+		while (fast != null && fast.nextNode != null) {
+			slow = slow.nextNode;
+			fast = fast.nextNode.nextNode;
+			i++;
+		}
+		return i;
+	}
+
+	public void reverse() {
+		if (headNode == null) {
+			return;
+		}
+		Node<T> prev, next, current;
+		prev = current = null;
+		next = headNode;
+		while (next != null) {
+			current = next;
+			next = next.nextNode;
+			current.nextNode = prev;
+			prev = current;
+		}
+		// Current is the new Head;
+		headNode = current;
+	}
+
+	public void recReverse() {
+		reverseRecursion(headNode);
+	}
+
+	private void reverseRecursion(Node<T> currentNode) {
+		// TODO Auto-generated method stub
+		if (currentNode == null) {
+			headNode = currentNode;
+			return;
+		}
+		reverseRecursion(currentNode.nextNode);
+		
+		pushCurrentNode(headNode,currentNode);
+
+	}
+
+	private void pushCurrentNode(Node<T> prevNode,Node<T> currentNode) {
+		// TODO Auto-generated method stub
+		if(prevNode==null && headNode==null){
+				currentNode.nextNode=null;
+				headNode=currentNode;
+				return;
+			
+		}
+		if(prevNode.nextNode==null){
+			currentNode.nextNode=null;
+			prevNode.nextNode=currentNode;
+			return;
+		}
+		pushCurrentNode(prevNode.nextNode,currentNode);
+	}
+
 	public static void main(String[] args) {
-		LinkList<Integer> linkList= new LinkList<Integer>();
+		LinkList<Integer> linkList = new LinkList<Integer>();
 		linkList.add(5);
 		linkList.add(1);
 		linkList.add(10);
 		linkList.add(12);
 		linkList.add(3);
 		linkList.add(4);
-		
+		linkList.add(7);
+
 		System.out.println(linkList);
-		
+
+		System.out.println("Mid value" + linkList.returnMidValue());
+
+		System.out.println("Mid index" + linkList.returnMidIdx());
+		linkList.recReverse();
+		System.out.println("Reversed" + linkList);
+
 	}
 
 }
