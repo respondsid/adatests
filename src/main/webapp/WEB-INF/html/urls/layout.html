@@ -1,0 +1,85 @@
+<div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
+<form class="form-horizontal">
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">Url Code</label>
+
+		<div class="controls">
+			<input type="text" id="inputEmail" ng-model="url.urlCode"
+				placeholder="Url Code" ng-disabled="editMode"  ng-required="required" min="2" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">Application</label>
+		<div class="controls">
+			<select ng-model="url.application" ng-options="item for item in applications" required="required" ng-change="refreshParams(url.application)" ></select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">Base Url</label>
+		<div class="controls">
+			<input class="span3" type="text" id="urlbaseurl"
+				ng-model="url.baseUrl" placeholder="baseURL" required="required"
+				min="1" />
+		</div>
+	</div>
+	<div ng-repeat="parameter in url.parameters | orderBy:predicate"
+		class="control-group">
+		<table>
+			<tr>
+				<td style="text-align: center; width: 20px;">
+					<div class="control-group">
+						<label class="control-label" for="parameterName">Parameter
+							Name</label>
+						<div class="controls">
+							<input class="span3" type="text" id="parameterName"
+								ng-model="parameter.paramName" placeholder="application"
+								required="required" min="1" />
+						</div>
+
+					</div>
+				</td >
+				<td style="text-align: center; width: 20px;">
+					<div class="control-group">
+						<label class="control-label" for="parameterValue">Parameter
+							Value</label>
+						<div class="controls">
+							<input class="span3" type="text" id="parameterValue"
+								ng-model="parameter.paramValue" placeholder="application"
+								required="required" min="1" />
+						</div>
+					</div>
+				</td>
+				<td style="text-align: center; width: 20px;">
+					<div class="control-group">
+						<label class="control-label" for="parameterType">Dynamic</label>
+						<div class="controls">
+							<input class="span3" type="checkbox" id="paramTypeValue"
+								ng-model="parameter.dynamic" placeholder="application"
+								required="required" min="1" />
+						</div>
+					</div>
+				</td>
+				<td style="text-align: center; width: 20px;">
+					<div class="control-group">
+						<button class="btn btn-mini btn-danger" ng-click="deleteParameter(parameter)">Delete</button>
+					</div>
+
+				</td>
+			</tr>
+
+		</table>
+		
+	</div>
+
+	<hr />
+	<div class="controls">
+		<button type="button" class="btn btn-success"
+			ng-click="addNewParameter()">Add Parameter</button>
+			
+	</div>
+<hr />
+<hr />
+    <button type="button" class="btn btn-primary" ng-disabled="!url.baseUrl" ng-hide="editMode" ng-click="addNewUrl(url)">Add Url</button>
+    <button type="button" class="btn btn-primary" ng-disabled="!url.baseUrl" ng-show="editMode" ng-click="updateUrl(url)">Save Url</button>
+
+</form>

@@ -1,0 +1,62 @@
+<div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
+<h3>URLs List</h3>
+<div class="alert alert-info" ng-show="urls.length == 0">No Urls
+	found</div>
+<form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+        <input type="text" class="form-control" placeholder="Search Url" ng-model="searchUrl"/>
+
+      </div>      
+    </div>
+  </form>
+<table class="table table-bordered table-striped"
+	ng-show="urls.length > 0">
+	<thead>
+		
+		<tr>
+        <td>
+          <a href="#" ng-click="sortType = 'urlCode'">
+            UrlCode
+            <span ng-show="sortType == 'urlCode'" class="fa fa-caret-down"></span>
+          </a>
+        </td>
+		 <td>
+          <a href="#" ng-click="sortType = 'application'">
+            Application
+            <span ng-show="sortType == 'application'" class="fa fa-caret-down"></span>
+          </a>
+        </td>	
+		 <td>
+          <a href="#" ng-click="sortType = 'fullUrl'">
+            Url
+            <span ng-show="sortType == 'fullUrl'" class="fa fa-caret-down"></span>
+          </a>
+        </td>
+         <td>
+          <a href="#" >
+            Action
+            <span class="fa fa-caret-down"></span>
+          </a>
+        </td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="tempUrl in urls | orderBy:sortType:sortReverse | filter:searchUrl">
+			<td style="text-align: center;">{{tempUrl.urlCode}}</td>
+			<td>{{tempUrl.application}}</td>
+			<td>{{tempUrl.fullUrl}}</td>
+			<td >
+				<button class="btn btn-mini btn-danger"
+					ng-click="removeUrl(tempUrl.urlcode)">Remove</button>
+				<button class="btn btn-mini btn-success" ng-click="editUrl(tempUrl)">Edit</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-danger" ng-show="urls.length > 1"
+	ng-click="removeAllUrls()">Remove All Urls</button>
+<button class="btn btn-Add new url" 
+	ng-click="addUrl()">Add new Url</button>	

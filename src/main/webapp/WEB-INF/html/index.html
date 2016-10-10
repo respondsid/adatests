@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="AngularSpringApp">
+<head>
+    <meta charset="utf-8"/>
+    <title>Service App</title>
+    <link rel="stylesheet" href="resources/css/app.css"/>
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <ul class="menu">
+        <li><a ui-sref="cars">Cars</a></li>
+        <li><a ui-sref="trains">Trains</a></li>
+        <li><a ui-sref="railwaystations">Railway Station</a></li>
+        <li><a ui-sref="url">Urls</a></li>
+    </ul>
+    <hr class="" />
+    <div ui-view=""></div>
+</div>
+
+<script src="resources/js/lib/angular/angular.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"/>
+<script src="resources/js/app.js"></script>
+<script src="resources/js/services.js"></script>
+<script src="resources/js/controllers/RailwayStationController.js"></script>
+<script src="resources/js/controllers/CarController.js"></script>
+<script src="resources/js/controllers/TrainController.js"></script>
+<script src="resources/js/controllers/UrlController.js"></script>
+<script src="resources/js/controllers/AddUrlController.js"></script>
+<script src="resources/js/controllers/EditUrlController.js"></script>
+<script src="resources/js/filters.js"></script>
+<script src="resources/js/directives.js"></script>
+</body>
+</html>
